@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * This is hook module file.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_count_node_view.
+ *
+ * Counts the number of times a node has been viewed in a particular session.
+ *
+ * @param Drupal\node\NodeInterface $node
+ *   The current node.
+ *
+ * @return int
+ *   This return the how many time node is viewed.
+ */
+function my_module_count_node_view(NodeInterface $node): int {
+
+  // Fetching the current session.
+  $session = \Drupal::request()->getSession();
+
+  // Getting the count of all views of the nodes from session variable.
+  $current_counts = $session->get('count_nodes.view_counts', array());
+
+  // If view count is not set for current node, setting it to 1,
+  // else incrementing it.
+  if (!isset($current_counts[$node->id()])) {
+    $current_counts[$node->id()] = 1;
+  }
+  else {
+    $current_counts[$node->id()]++;
+  }
+
+  // Setting the session variable with updated view counts.
+  $session->set('count_nodes.view_counts', $current_counts);
+  // Returning the view counts of the current node.
+  return $current_counts[$node->id()];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view.
+ *
+ * @param array $build
+ *   Array representing the entity content.
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ *   The current entity object.
+ * @param Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+ *   The entity view display.
+ * @param mixed $view_mode
+ *   The view mode the entity is rendered in.
+ * @return void
+ */
+function my_module_node_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  $module_handler = \Drupal::moduleHandler();
+  $current_counts = $module_handler->invokeAll('count_node_view', array($entity));
+  $current_counts = $current_counts[0];
+
+  $build['view_count'] = array(
+    '#markup' => '<p>' . t('You have viewed this node @total times this session.', array('@total' => $current_counts)) . '</p>',
+    '#cache' => [
+      'max-age' => 0,
+    ],
+  );
+
+}
