@@ -1,0 +1,4 @@
+my_module_permission:
+  title: 'My Module permission'
+  description: 'Permissions for the "my_module" module.'
+  restrict access: true

@@ -1,0 +1,7 @@
+my_module_route:
+  path: '/my_module'
+  defaults:
+    _controller: '\Drupal\my_module\Controller\MyModuleController::showText'
+    _title: 'Welcome to "My module" module.'
+  requirements:
+    _permission: 'access content'
