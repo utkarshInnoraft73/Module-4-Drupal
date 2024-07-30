@@ -1,0 +1,8 @@
+name: Custom Form Task 2
+description: 'This module for practice to create and manage the form.'
+type: module
+package: custom
+core_version_requirement: ^9.4 || ^10
+
+dependencies:
+  - drupal:views

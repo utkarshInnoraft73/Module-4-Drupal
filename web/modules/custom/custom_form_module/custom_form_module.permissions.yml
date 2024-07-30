@@ -1,0 +1,4 @@
+custom_form_module_permission:
+  title: 'Custom Form Module permission'
+  description: 'Permissions for the "custom_form_module" module.'
+  restrict access: true
