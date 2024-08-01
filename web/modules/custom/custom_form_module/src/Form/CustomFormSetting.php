@@ -1,62 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\custom_form_module\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * CustomFormSettingsForm Class is for set the custom form cofiguration setting.
+ * Configure Custom Form module settings for this site.
  */
-class CustomFormSettingsForm extends ConfigFormBase {
+final class CustomFormSetting extends ConfigFormBase {
 
   /**
-   * Config settings.
-   *
-   * @var string
+   * {@inheritdoc}
    */
-  const SETTINGS = 'custom_form.custom_module_config_form';
-
-  /**
-   * Method getFormId.
-   *
-   * @return string
-   *   Form Id.
-   */
-  public function getFormId() : string {
-    return 'custom_module_config_form';
-
+  public function getFormId(): string {
+    return 'custom_form_module_custom_setting';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
-    return [
-      static::SETTINGS,
-    ];
+  protected function getEditableConfigNames(): array {
+    return ['custom_form_module.settings'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config(static::SETTINGS);
-
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['full_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Full Name'),
-      '#default_value' => $config->get('full_name'),
       '#required' => TRUE,
     ];
 
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Email ID'),
-      '#default_value' => $config->get('email'),
       '#required' => TRUE,
     ];
-
     $form['country_code'] = [
       '#type' => 'select',
       '#title' => $this->t('Country Code'),
@@ -83,15 +67,13 @@ class CustomFormSettingsForm extends ConfigFormBase {
       ],
       '#default_value' => 'male',
     ];
-
     return parent::buildForm($form, $form_state);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     // Validate phone number.
     $phone_number = $form_state->getValue('phone_number');
     if (!preg_match('/^[6-9][0-9]{9}$/', $phone_number)) {
@@ -128,18 +110,15 @@ class CustomFormSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->config(static::SETTINGS)
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
+    $this->config('custom_form_module.settings')
       ->set('full_name', $form_state->getValue('full_name'))
-      ->set('phone', $form_state->getValue('phone'))
       ->set('email', $form_state->getValue('email'))
+      ->set('country_code', $form_state->getValue('country_code'))
+      ->set('phone_number', $form_state->getValue('phone_number'))
       ->set('gender', $form_state->getValue('gender'))
       ->save();
-
     parent::submitForm($form, $form_state);
-    \Drupal::messenger()->addMessage(
-      $this->t('Configuration saved successfully.')
-    );
   }
 
 }

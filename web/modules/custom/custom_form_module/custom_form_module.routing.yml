@@ -1,7 +1,23 @@
-custom_form_module.custom_module_config_form:
-  path: '/custom_form_module/settings'
+custom_form_module.custom_setting:
+  path: '/admin/config/system/custom-setting'
   defaults:
-    _form: '\Drupal\custom_form_module\Form\CustomFormSettingsForm'
-    _title: 'Custom configuration form'
+    _title: 'Custom config form setting'
+    _form: 'Drupal\custom_form_module\Form\CustomFormSetting'
+  requirements:
+    _permission: 'administer site configuration'
+
+custom_form_module.ajax_setting:
+  path: '/admin/config/system/ajax-setting'
+  defaults:
+    _title: 'Ajax config form'
+    _form: 'Drupal\custom_form_module\Form\AjaxFormSetting'
+  requirements:
+    _permission: 'Form with AJAX feature'
+
+custom_form_module.reset_password:
+  path: '/admin/config/system/reset-password'
+  defaults:
+    _title: 'Reset password'
+    _form: 'Drupal\custom_form_module\Form\ResetPassword'
   requirements:
     _permission: 'administer site configuration'

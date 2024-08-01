@@ -1,0 +1,20 @@
+custom_form_module.custom_setting:
+  title: Custom config form setting
+  description: This form is for user details.
+  parent: system.admin_config_system
+  route_name: custom_form_module.custom_setting
+  weight: 10
+
+custom_form_module.ajax_setting:
+  title: Ajax config form
+  description: Form with AJAX feature
+  parent: system.admin_config_system
+  route_name: custom_form_module.ajax_setting
+  weight: 10
+
+custom_form_module.reset_password:
+  title: Reset password
+  description: Reset user&#039;s password.
+  parent: system.admin_config_system
+  route_name: custom_form_module.reset_password
+  weight: 10

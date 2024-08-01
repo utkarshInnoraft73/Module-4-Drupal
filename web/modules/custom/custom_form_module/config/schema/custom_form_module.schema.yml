@@ -1,0 +1,26 @@
+# Schema for the configuration files of the Custom Form module module.
+custom_form_module.settings:
+  type: config_object
+  label: 'Custom Form module settings'
+  mapping:
+    example:
+      type: string
+      label: 'Example'
+
+# Schema for the configuration files of the Custom Form module module.
+custom_form_module.custom_form_module_ajax_setting:
+  type: config_object
+  label: 'Custom Form module settings'
+  mapping:
+    example:
+      type: string
+      label: 'Example'
+
+# Schema for the configuration files of the Custom Form module module.
+custom_form_module.reset_password:
+  type: config_object
+  label: 'Custom Form module settings'
+  mapping:
+    example:
+      type: string
+      label: 'Example'
