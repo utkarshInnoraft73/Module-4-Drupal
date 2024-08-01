@@ -1,7 +1,0 @@
-custom_form_task_2.custom_form_task_2_config_form:
-  path: '/customFromTask2/settings'
-  defaults:
-    _form: '\Drupal\custom_form_task_2\Form\CustomFormTask2SettingsForm'
-    _title: 'Custom configuration form task 2'
-  requirements:
-    _permission: 'administer site configuration'

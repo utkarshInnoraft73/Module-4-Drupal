@@ -1,4 +1,0 @@
-custom_form_task_2_permission:
-  title: 'Custom Form Task 2 permission'
-  description: 'Permissions for the "custom_form_task_2" module.'
-  restrict access: true
