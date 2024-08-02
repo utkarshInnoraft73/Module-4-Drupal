@@ -1,0 +1,17 @@
+mymodule.simplecontent:
+  path: '/mymodule'
+  defaults:
+    _controller: '\Drupal\mymodule\Controller\MyModuleController::simpleContent'
+    _title: 'My module simple route'
+  requirements:
+    _role: administrator+content_editor
+    _permission: 'access custom permission'
+
+mymodule.parameterContent:
+  path: '/mymodule/{param}'
+  defaults:
+    _controller: '\Drupal\mymodule\Controller\MyModuleController::parameterContent'
+    _title: 'My module parameter Content'
+  requirements:
+    _permission: 'access custom permission'
+    _custom_access: '\Drupal\mymodule\Controller\MyModuleController::access'
