@@ -1,0 +1,5 @@
+name: My Module
+description: My module is for practicing the routing systems.
+package: custom
+type: module
+core_version_requirement: ^9.2 || ^10
