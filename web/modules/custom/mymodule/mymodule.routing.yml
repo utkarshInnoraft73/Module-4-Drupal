@@ -7,9 +7,8 @@ mymodule.simplecontent:
     _role: administrator+content_editor
     _permission: 'access custom permission'
 
-
 mymodule.parameterContent:
-  path: '/mymodule/{id}'
+  path: '/mymodule/{param}'
   defaults:
     _controller: '\Drupal\mymodule\Controller\MyModuleController::parameterContent'
     _title: 'My module parameter Content'

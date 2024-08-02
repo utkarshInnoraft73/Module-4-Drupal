@@ -46,16 +46,16 @@ class MyModuleController extends ControllerBase {
   /**
    * Method parameterContent.
    *
-   * @param int $id
+   * @param string $param
    *   Custom parameter accessing from the url.
    *
    * @return array
    *   Markup.
    */
-  public function parameterContent(int $id) : array {
+  public function parameterContent(string $param) : array {
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('Your Parameter given in url is: @id', ['@id' => $id]),
+      '#markup' => $this->t('Your Parameter given in url is: @param', ['@param' => $param]),
     ];
   }
 
