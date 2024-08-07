@@ -1,0 +1,31 @@
+<table>
+	<thead>
+		<tr>
+    {% for row in data %}
+      <th>{{ row.group_name }}</th>
+    {% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+			<tr>
+		{% for row in data %}
+				<td>{{ row.first_label }}</td>
+		{% endfor %}
+			</tr>
+			<tr>
+		{% for row in data %}
+    <td>{{ row.first_lable_value }}</td>
+		{% endfor %}
+			</tr>
+			<tr>
+		{% for row in data %}
+				<td>{{ row.second_label }}</td>
+		{% endfor %}
+			</tr>
+			<tr>
+		{% for row in data %}
+				<td>{{ row.second_label_value }}</td>
+		{% endfor %}
+			</tr>
+	</tbody>
+</table>

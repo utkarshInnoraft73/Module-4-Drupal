@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * To create a table for a form.
+ */
+
+/**
+ * Method my_example_custom_module_schema to define the schema of my flagship.
+ *
+ * @return array
+ *   Return the schema of the flagship form.
+ */
+function my_example_custom_module_schema() : array {
+  $schema['my_example_custom_module_flag_ship'] = [
+    'description' => 'The flagship simple form.',
+    'fields' => [
+
+      // Field for id.
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'description' => 'Flagship id',
+      ],
+
+      // Field for group name.
+      'group_name' => [
+        'description' => 'Name of the group.',
+        'type' => 'varchar',
+        'length' => 128,
+        'default' => '',
+      ],
+
+      // Field for first label.
+      'first_label' => [
+        'description' => 'Name of 1st label.',
+        'type' => 'varchar',
+        'length' => 128,
+        'default' => '',
+      ],
+
+      // Field for first label value.
+      'first_lable_value' => [
+        'description' => 'Value of 1st label.',
+        'type' => 'varchar',
+        'length' => 128,
+        'default' => '',
+      ],
+
+      // Field for second label.
+      'second_label' => [
+        'description' => 'Name of 2nd label.',
+        'type' => 'varchar',
+        'length' => 128,
+        'default' => '',
+      ],
+
+      // Field for second label value.
+      'second_label_value' => [
+        'description' => 'Value of 2nd label.',
+        'type' => 'varchar',
+        'length' => 128,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}

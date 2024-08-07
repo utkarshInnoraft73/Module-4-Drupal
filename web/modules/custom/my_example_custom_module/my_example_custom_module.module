@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * To implement the hooks for the module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Method my_example_custom_module_form_user_login_form_alter to alter the url.
+ *
+ * After the user login.
+ *
+ * @param array $form
+ *   [Explicite description].
+ * @param Drupal\Core\Form\FormStateInterface $form_state
+ *   [Eplicite description].
+ * @param string $form_id
+ *   [Explicite description].
+ */
+function my_example_custom_module_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'my_example_custom_module_user_login_form_submit';
+}
+
+/**
+ * Method my_example_custom_module_user_login_form_submit.
+ *
+ * @param array $form
+ *   [Explicite description].
+ * @param Drupal\Core\Form\FormStateInterface $form_state
+ *   [Explicite description].
+ */
+function my_example_custom_module_user_login_form_submit($form, FormStateInterface $form_state) {
+  $url = Url::fromRoute('my_example_custom_module.custom-page');
+  $form_state->setRedirectUrl($url);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function my_example_custom_module_theme($existing, $type, $theme, $path) {
+  return [
+    'flagship_programme_table' => [
+      'variables' => [
+        'data' => [],
+      ],
+    ],
+  ];
+}

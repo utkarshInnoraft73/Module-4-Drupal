@@ -1,0 +1,15 @@
+my_example_custom_module.custom-page:
+  path: '/custom-welcome-page'
+  defaults:
+    _title: 'Custom Welcome role page.'
+    _controller: '\Drupal\my_example_custom_module\Controller\MyExampleCustomModuleController::customText'
+  requirements:
+    _permission: 'access content'
+
+my_example_custom_module.flag_ship:
+  path: '/flag-ship-form'
+  defaults:
+    _title: 'Flagship details.'
+    _form: 'Drupal\my_example_custom_module\Form\FlagShipForm'
+  requirements:
+    _permission: 'access content'
