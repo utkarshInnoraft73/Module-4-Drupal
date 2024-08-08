@@ -1,0 +1,22 @@
+.container{
+  width: 1400px;
+}
+.row{
+  background: linear-gradient(rgb(151, 193, 231), rgb(126, 239, 203));
+  border-radius: 15px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.inner_flex{
+  text-align: center;
+}
+.welcome-text{
+  background-color: #1888C9;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-top: 12px;
+  padding: 20px;
+}

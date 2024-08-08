@@ -1,13 +1,14 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\my_example_custom_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountProxyInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a welcome user block block.
+ * Provides a welcome user block.
  *
  * @Block(
  *   id = "my_example_custom_module_welcome_user_block",
@@ -15,25 +16,77 @@ use Drupal\Core\Block\BlockBase;
  *   category = @Translation("Custom"),
  * )
  */
-final class WelcomeUserBlockBlock extends BlockBase {
+class WelcomeUserBlockBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Method build to show the markup.
+   * The current user service.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * Constructs a new WelcomeUserBlockBlock.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Session\AccountProxyInterface $currentUser
+   *   The current user service.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccountProxyInterface $currentUser) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->currentUser = $currentUser;
+  }
+
+  /**
+   * Method create.
+   *
+   * @param Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   Container services.
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('current_user')
+    );
+  }
+
+  /**
+   * Method build.
    *
    * @return array
-   *   Return the markup.
+   *   Return build array.
    */
   public function build(): array {
-    $userRole = \Drupal::currentUser()->getRoles();
+    $userRoles = $this->currentUser->getRoles();
     $welcomeText = "Welcome ";
-    for ($i = 0; $i < count($userRole); $i++) {
-      $welcomeText = $welcomeText . " " . $userRole[$i];
-    }
+    $welcomeText .= implode(', ', $userRoles);
 
-    $build = [
-      '#markup' => $welcomeText,
+    return [
+      '#type' => 'markup',
+      '#markup' => '<div class = "welcome-text">' . $welcomeText . '</div>',
+      '#cache' => [
+        'contexts' => ['user.roles'],
+        'tags' => ['user:' . $this->currentUser->id()],
+      ],
+      '#attached' => [
+        'library' => [
+          'my_example_custom_module/my_example_custom_module_css',
+        ],
+      ],
     ];
-    return $build;
   }
 
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\my_example_custom_module\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
@@ -18,36 +16,34 @@ use Drupal\Core\Block\BlockBase;
 final class FlagshipProgrammeBlock extends BlockBase {
 
   /**
+   * Protected loaddata.
+   *
+   * @var mixed
+   */
+  protected $loaddata;
+
+  public function __construct() {
+    $this->loaddata = \Drupal::service('my_example_custom_module.db_operations');
+  }
+
+  /**
    * Method build to show the data.
    *
    * @return array
    *   The data fetched from the 'my_example_custom_module_flag_ship' table.
    */
   public function build(): array {
-
-    $connection = \Drupal::database();
-    $query = $connection->select('my_example_custom_module_flag_ship', 'm')
-      ->fields('m', ['group_name', 'first_label', 'first_lable_value', 'second_label', 'second_label_value'])
-      ->execute();
-    $results = $query->fetchAll();
-    $output = [];
-    foreach ($results as $row) {
-      $output[] = [
-        'group_name' => $row->group_name,
-        'first_label' => $row->first_label,
-        'first_lable_value' => $row->first_lable_value,
-        'second_label' => $row->second_label,
-        'second_label_value' => $row->second_label_value,
-      ];
-    }
-
+    $output[] = $this->loaddata->getData();
     return [
       '#theme' => 'flagship_programme_table',
       '#data' => $output,
       '#attached' => [
         'library' => [
-          'my_example_custom_module/flagship_programme_styles',
+          'my_example_custom_module/my_example_custom_module_css',
         ],
+      ],
+      '#cache' => [
+        'tags' => ['my_example_custom_module_flag_ship'],
       ],
     ];
 

@@ -1,0 +1,4 @@
+services:
+  my_example_custom_module.db_operations:
+    class: Drupal\my_example_custom_module\services\CustomServices
+    arguments: ['@database']

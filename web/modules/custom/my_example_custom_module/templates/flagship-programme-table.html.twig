@@ -1,31 +1,23 @@
-<table>
-	<thead>
-		<tr>
-    {% for row in data %}
-      <th>{{ row.group_name }}</th>
-    {% endfor %}
-		</tr>
-	</thead>
-	<tbody>
-			<tr>
+<div class = 'container'>
+	<div class = 'row'>
 		{% for row in data %}
-				<td>{{ row.first_label }}</td>
-		{% endfor %}
-			</tr>
-			<tr>
-		{% for row in data %}
-    <td>{{ row.first_lable_value }}</td>
-		{% endfor %}
-			</tr>
-			<tr>
-		{% for row in data %}
-				<td>{{ row.second_label }}</td>
-		{% endfor %}
-			</tr>
-			<tr>
-		{% for row in data %}
-				<td>{{ row.second_label_value }}</td>
-		{% endfor %}
-			</tr>
-	</tbody>
-</table>
+			<div class = 'group_name inner_flex'>
+				<div class='child_box'>
+					<h3>{{ row.group_name }}</h3>
+				</div>
+				<div class='child_box'>
+					<p>{{ row.first_label }}</p>
+				</div>
+				<div class='child_box'>
+					<p>{{ row.first_lable_value }}</p>
+				</div>
+				<div class='child_box'>
+					<p>{{ row.second_label }}</p>
+				</div>
+				<div class='child_box'>
+					<p>{{ row.second_label_value }}</p>
+				</div>
+			</div>
+	 {% endfor %}
+	</div>
+</div>

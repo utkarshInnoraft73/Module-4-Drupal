@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\my_example_custom_module\Controller;
 
 use Drupal\Core\Controller\ControllerBase;

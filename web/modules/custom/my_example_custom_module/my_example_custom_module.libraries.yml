@@ -1,0 +1,6 @@
+# Custom library for general purposes.
+my_example_custom_module_css:
+  version: 1.0
+  css:
+    theme:
+      css/my_example_custom_module_css.css: {}

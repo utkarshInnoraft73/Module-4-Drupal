@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\my_example_custom_module\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -13,10 +11,24 @@ use Drupal\Core\Form\FormStateInterface;
 final class FlagShipForm extends FormBase {
 
   /**
+   * Protected loaddata.
+   *
+   * @var mixed
+   */
+  protected $loaddata;
+
+  /**
    * {@inheritdoc}
    */
   public function getFormId(): string {
     return 'my_example_custom_module_flag_ship';
+  }
+
+  /**
+   * Method __construct.
+   */
+  public function __construct() {
+    $this->loaddata = \Drupal::service('my_example_custom_module.db_operations');
   }
 
   /**
@@ -169,26 +181,8 @@ final class FlagShipForm extends FormBase {
    *   The form state.
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    // Retrieve the form values.
-    $values = $form_state->getValue('names_fieldset');
-
-    // Iterate through the values and insert them into the database.
-    foreach ($values as $value) {
-      if (is_array($value) && isset($value['group_name'])) {
-        \Drupal::database()->insert('my_example_custom_module_flag_ship')
-          ->fields([
-            'group_name' => $value['group_name'],
-            'first_label' => $value['1st_label'],
-            'first_lable_value' => $value['1st_label_value'],
-            'second_label' => $value['2nd_label'],
-            'second_label_value' => $value['2nd_label_value'],
-          ])
-          ->execute();
-      }
-    }
-
-    // Display a message and redirect.
-    $this->messenger()->addStatus($this->t('The message has been sent.'));
+    $query = $this->loaddata->setData($form_state);
+    $this->messenger()->addStatus($this->t('The message has been sent.'), 'status');
     $form_state->setRedirect('<front>');
 
   }
