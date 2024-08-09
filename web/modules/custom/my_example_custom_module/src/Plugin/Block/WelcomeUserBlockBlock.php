@@ -55,6 +55,7 @@ class WelcomeUserBlockBlock extends BlockBase implements ContainerFactoryPluginI
    *   The plugin implementation definition.
    *
    * @return object
+   *   Provide welcome user block.
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) : object {
     return new static(

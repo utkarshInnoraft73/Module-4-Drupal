@@ -34,7 +34,11 @@ class MyExampleCustomModuleController extends ControllerBase {
     $current_user = $this->account->getDisplayName();
     $build['content'] = [
       '#type' => 'item',
-      '#markup' => t('Current User:') . ucfirst($current_user),
+      '#markup' => $this->t('Current User:') . ucfirst($current_user),
+      '#cache' => [
+        'contexts' => ['user.roles'],
+        'tags' => ['user:' . $this->account->id()],
+      ],
     ];
 
     return $build;

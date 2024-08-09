@@ -4,6 +4,8 @@ namespace Drupal\my_example_custom_module\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\my_example_custom_module\services\CustomServices;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a my_example_custom_module form.
@@ -13,13 +15,6 @@ use Drupal\Core\Form\FormStateInterface;
 class FlagShipForm extends FormBase {
 
   /**
-   * Protected loaddata.
-   *
-   * @var mixed
-   */
-  protected $loaddata;
-
-  /**
    * {@inheritdoc}
    */
   public function getFormId(): string {
@@ -27,10 +22,26 @@ class FlagShipForm extends FormBase {
   }
 
   /**
-   * Method __construct.
+   * Protected loaddata.
+   *
+   * @var mixed
    */
-  public function __construct() {
-    $this->loaddata = \Drupal::service('my_example_custom_module.db_operations');
+  protected $loaddata;
+
+  public function __construct(CustomServices $loaddata) {
+    $this->loaddata = $loaddata;
+  }
+
+  /**
+   * Method create.
+   *
+   * @param CSymfony\Component\DependencyInjection\ContainerInterface $container
+   *   [Explicite description].
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('my_example_custom_module.db_operations')
+    );
   }
 
   /**
@@ -72,27 +83,27 @@ class FlagShipForm extends FormBase {
       ];
       $form['names_fieldset'][$i]['group_name'] = [
         '#type' => 'textfield',
-        '#title' => t('Group name'),
+        '#title' => $this->t('Group name'),
         '#required' => TRUE,
       ];
       $form['names_fieldset'][$i]['1st_label'] = [
         '#type' => 'textfield',
-        '#title' => t('1st Label name'),
+        '#title' => $this->t('1st Label name'),
         '#required' => TRUE,
       ];
       $form['names_fieldset'][$i]['1st_label_value'] = [
         '#type' => 'textfield',
-        '#title' => t('1st Label value'),
+        '#title' => $this->t('1st Label value'),
         '#required' => TRUE,
       ];
       $form['names_fieldset'][$i]['2nd_label'] = [
         '#type' => 'textfield',
-        '#title' => t('2nd Label name'),
+        '#title' => $this->t('2nd Label name'),
         '#required' => TRUE,
       ];
       $form['names_fieldset'][$i]['2nd_label_value'] = [
         '#type' => 'textfield',
-        '#title' => t('2nd Label value'),
+        '#title' => $this->t('2nd Label value'),
         '#required' => TRUE,
       ];
     }
@@ -102,7 +113,7 @@ class FlagShipForm extends FormBase {
     ];
     $form['names_fieldset']['actions']['add_name'] = [
       '#type' => 'submit',
-      '#value' => t('Add one more'),
+      '#value' => $this->t('Add one more'),
       '#submit' => ['::addOne'],
       '#ajax' => [
         'callback' => '::addmoreCallback',
@@ -112,7 +123,7 @@ class FlagShipForm extends FormBase {
     if ($form_state->get('num_names') > 1) {
       $form['names_fieldset']['actions']['remove_name'] = [
         '#type' => 'submit',
-        '#value' => t('Remove one'),
+        '#value' => $this->t('Remove one'),
         '#submit' => ['::removeCallback'],
         '#ajax' => [
           'callback' => '::addmoreCallback',
@@ -156,7 +167,7 @@ class FlagShipForm extends FormBase {
    *   Return the forms.
    */
   public function addmoreCallback(array &$form, FormStateInterface $form_state) : array {
-    $name_field = $form_state->get('num_names');
+    $form_state->get('num_names');
     return $form['names_fieldset'];
   }
 
@@ -186,7 +197,7 @@ class FlagShipForm extends FormBase {
    *   The form state.
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $query = $this->loaddata->setData($form_state);
+    $this->loaddata->setData($form_state);
     $this->messenger()->addStatus($this->t('The message has been sent.'), 'status');
     $form_state->setRedirect('<front>');
 

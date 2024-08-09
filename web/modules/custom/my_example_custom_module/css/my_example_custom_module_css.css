@@ -1,9 +1,6 @@
-.container{
-  width: 1400px;
-}
 .row{
-  background: linear-gradient(rgb(151, 193, 231), rgb(126, 239, 203));
-  border-radius: 15px;
+  background: linear-gradient(rgba(151, 192, 231, 0.452), rgba(126, 239, 203, 0.353)),
+      url('https: //www.simplilearn.com/ice9/free_resources_article_thumb/What_is_the_Importance_of_Technology.jpg') center center / cover;  border-radius: 15px;
   padding: 12px;
   display: flex;
   flex-direction: row;

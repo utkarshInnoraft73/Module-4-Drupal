@@ -1,0 +1,7 @@
+field.value.my_example_custom_module_custom_field:
+  type: mapping
+  label: Default value
+  mapping:
+    value:
+      type: label
+      label: Value
