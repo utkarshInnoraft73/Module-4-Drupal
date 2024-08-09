@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * This class build, submit a form for flagship programme on the webpage.
  */
-final class FlagShipForm extends FormBase {
+class FlagShipForm extends FormBase {
 
   /**
    * Protected loaddata.

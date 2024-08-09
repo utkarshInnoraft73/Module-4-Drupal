@@ -13,7 +13,7 @@ use Drupal\Core\Block\BlockBase;
  *   category = @Translation("Custom"),
  * )
  */
-final class FlagshipProgrammeBlock extends BlockBase {
+class FlagshipProgrammeBlock extends BlockBase {
 
   /**
    * Protected loaddata.
