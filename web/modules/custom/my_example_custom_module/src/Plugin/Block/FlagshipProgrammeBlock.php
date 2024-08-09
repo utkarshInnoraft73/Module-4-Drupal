@@ -32,7 +32,7 @@ class FlagshipProgrammeBlock extends BlockBase {
    * @return array
    *   The data fetched from the 'my_example_custom_module_flag_ship' table.
    */
-  public function build(): array {
+  public function build() : array {
     $output[] = $this->loaddata->getData();
     return [
       '#theme' => 'flagship_programme_table',

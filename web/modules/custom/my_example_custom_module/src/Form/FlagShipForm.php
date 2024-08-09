@@ -44,8 +44,11 @@ class FlagShipForm extends FormBase {
    *   The form elements.
    * @param Drupal\Core\Form\FormStateInterface $form_state
    *   The form state.
+   *
+   * @return array
+   *   Return the form 'names_fieldset'.
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) : array {
 
     $i = 0;
     $name_field = $form_state->get('num_names');
@@ -152,7 +155,7 @@ class FlagShipForm extends FormBase {
    * @return array
    *   Return the forms.
    */
-  public function addmoreCallback(array &$form, FormStateInterface $form_state) {
+  public function addmoreCallback(array &$form, FormStateInterface $form_state) : array {
     $name_field = $form_state->get('num_names');
     return $form['names_fieldset'];
   }

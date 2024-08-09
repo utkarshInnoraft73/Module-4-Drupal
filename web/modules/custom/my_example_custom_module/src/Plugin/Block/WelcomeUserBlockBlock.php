@@ -53,8 +53,10 @@ class WelcomeUserBlockBlock extends BlockBase implements ContainerFactoryPluginI
    *   The plugin ID for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
+   *
+   * @return object
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) : object {
     return new static(
       $configuration,
       $plugin_id,
@@ -69,7 +71,7 @@ class WelcomeUserBlockBlock extends BlockBase implements ContainerFactoryPluginI
    * @return array
    *   Return build array.
    */
-  public function build(): array {
+  public function build() : array {
     $userRoles = $this->currentUser->getRoles();
     $welcomeText = "Welcome ";
     $welcomeText .= implode(', ', $userRoles);
