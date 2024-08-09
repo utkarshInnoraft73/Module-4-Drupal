@@ -14,7 +14,7 @@ class CustomServices {
   /**
    * Protected $database .
    *
-   * @var mixed
+   * @var Drupal\Core\Database\Connection
    */
   protected $database;
 

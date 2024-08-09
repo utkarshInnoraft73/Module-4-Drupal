@@ -7,6 +7,8 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides a my_example_custom_module form.
+ *
+ * This class build, submit a form for flagship programme on the webpage.
  */
 final class FlagShipForm extends FormBase {
 

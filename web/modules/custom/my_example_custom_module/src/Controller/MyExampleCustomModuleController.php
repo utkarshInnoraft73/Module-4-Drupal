@@ -3,25 +3,38 @@
 namespace Drupal\my_example_custom_module\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountInterface;
 
 /**
- * Returns responses for my_example_custom_module routes.
+ * Class my_example_custom_module routes.
+ *
+ * It is a controller class that will show on the /custom-welcome-page route.
  */
-final class MyExampleCustomModuleController extends ControllerBase {
+class MyExampleCustomModuleController extends ControllerBase {
+
+  /**
+   * Protected account.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   *   Account details of the current details.
+   */
+  protected $account;
+
+  public function __construct(AccountInterface $account) {
+    $this->account = $account;
+  }
 
   /**
    * Method customText to return the custom text on the web page.
    *
    * @return array
-   *   Return the $markup.
+   *   Return the the cudtom text on the webpage.
    */
   public function customText(): array {
-
-    $current_user = \Drupal::currentUser();
-    $user = ($current_user->getDisplayName() == 'Anonymous') ? 'User Not logged in.' : 'You are welcome ' . ucfirst($current_user->getDisplayName()) . ".";
+    $current_user = $this->account->getDisplayName();
     $build['content'] = [
       '#type' => 'item',
-      '#markup' => $user,
+      '#markup' => t('Current User:') . ucfirst($current_user),
     ];
 
     return $build;

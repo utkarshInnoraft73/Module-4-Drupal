@@ -14,11 +14,11 @@ use Drupal\Core\Url;
  * After the user login.
  *
  * @param array $form
- *   [Explicite description].
+ *   Form.
  * @param Drupal\Core\Form\FormStateInterface $form_state
- *   [Eplicite description].
+ *   Form state.
  * @param string $form_id
- *   [Explicite description].
+ *   Unique form ID.
  */
 function my_example_custom_module_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['#submit'][] = 'my_example_custom_module_user_login_form_submit';
@@ -28,9 +28,9 @@ function my_example_custom_module_form_user_login_form_alter(&$form, FormStateIn
  * Method my_example_custom_module_user_login_form_submit.
  *
  * @param array $form
- *   [Explicite description].
+ *   Form.
  * @param Drupal\Core\Form\FormStateInterface $form_state
- *   [Explicite description].
+ *   Form state.
  */
 function my_example_custom_module_user_login_form_submit($form, FormStateInterface $form_state) {
   $url = Url::fromRoute('my_example_custom_module.custom-page');
@@ -38,7 +38,7 @@ function my_example_custom_module_user_login_form_submit($form, FormStateInterfa
 }
 
 /**
- * Implements hook_theme().
+ * Method my_example_custom_module_theme.
  */
 function my_example_custom_module_theme($existing, $type, $theme, $path) {
   return [
