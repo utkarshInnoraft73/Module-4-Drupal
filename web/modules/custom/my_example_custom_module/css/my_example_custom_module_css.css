@@ -1,7 +1,8 @@
+.flagship-container{
+background: linear-gradient(rgba(0, 6, 12, 0.793), rgba(1, 10, 28, 0.785)),
+    url('../images/bg1.jpeg') center center / cover;
+}
 .row{
-  background: linear-gradient(rgba(151, 192, 231, 0.452), rgba(126, 239, 203, 0.353)),
-      url('https: //www.simplilearn.com/ice9/free_resources_article_thumb/What_is_the_Importance_of_Technology.jpg') center center / cover;  border-radius: 15px;
-  padding: 12px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -9,6 +10,28 @@
 .inner_flex{
   text-align: center;
 }
+h2{
+  color: #fff !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+
+}
+.child_box h3{
+color: #fff;
+text-transform: uppercase;
+}
+.child_box p{
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 10px;
+  margin: 0;
+}
+.label-values p{
+  color: #F8AB4F;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
 .welcome-text{
   background-color: #1888C9;
   color: #fff;

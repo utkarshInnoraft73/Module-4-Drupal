@@ -1,4 +1,6 @@
-<div class = 'container'>
+<div class='flagship-container'>
+
+	<h2>FLAGSHIP PROGRAMME<h2>
 	<div class = 'row'>
 		{% for row in data %}
 			<div class = 'group_name inner_flex'>
@@ -8,13 +10,15 @@
 				<div class='child_box'>
 					<p>{{ row.first_label }}</p>
 				</div>
-				<div class='child_box'>
+<div class=' label-values'>
+
 					<p>{{ row.first_lable_value }}</p>
 				</div>
 				<div class='child_box'>
 					<p>{{ row.second_label }}</p>
 				</div>
-				<div class='child_box'>
+<div class='label-values'>
+
 					<p>{{ row.second_label_value }}</p>
 				</div>
 			</div>
