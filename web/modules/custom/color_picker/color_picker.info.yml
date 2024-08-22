@@ -1,0 +1,8 @@
+name: 'Color picker'
+type: module
+description: 'Select the colors.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:field
+  - drupal:field_ui
