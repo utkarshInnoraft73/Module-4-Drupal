@@ -21,14 +21,20 @@ class RgbColorPickerFormatterFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode): array {
     $elements = [];
-    foreach ($items as $delta => $item) {
-      $elements[$delta] = [
-        '#markup' => $this->t('Color is: RGB(@r, @g, @b)', [
-          '@r' => $item->r,
-          '@g' => $item->g,
-          '@b' => $item->b,
-        ]),
-      ];
+    $current_user = \Drupal::currentUser();
+    if ($current_user->hasPermission('view rgb field')) {
+      foreach ($items as $delta => $item) {
+        $elements[$delta] = [
+          '#markup' => $this->t('Color is: RGB(@r, @g, @b)', [
+            '@r' => $item->r,
+            '@g' => $item->g,
+            '@b' => $item->b,
+          ]),
+        ];
+      }
+    }
+    else {
+      $elements[] = ['#markup' => $this->t('Access denied')];
     }
 
     return $elements;

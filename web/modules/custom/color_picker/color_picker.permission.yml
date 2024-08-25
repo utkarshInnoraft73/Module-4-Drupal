@@ -1,0 +1,4 @@
+view rgb field:
+  title: 'View RGB field'
+  description: 'Allow users to view the RGB field.'
+  restrict access: true

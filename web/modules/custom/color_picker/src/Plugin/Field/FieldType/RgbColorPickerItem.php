@@ -20,7 +20,10 @@ use Drupal\Core\TypedData\DataDefinition;
 class RgbColorPickerItem extends FieldItemBase {
 
   /**
-   * {@inheritdoc}
+   * Method isEmpty.
+   *
+   * @return bool
+   *   Return TRUE if any of field is null.
    */
   public function isEmpty(): bool {
     $r = $this->get('r')->getValue();
@@ -30,7 +33,13 @@ class RgbColorPickerItem extends FieldItemBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Method propertyDefinitions to set the property.
+   *
+   * @param Drupal\Core\Field\FieldStorageDefinitionInterface $field_definition
+   *   [Explicite description].
+   *
+   * @return array
+   *   Return the propertise arrar for the field.
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
     $properties['hex'] = DataDefinition::create('string')
@@ -52,7 +61,13 @@ class RgbColorPickerItem extends FieldItemBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Method schema.
+   *
+   * @param Drupal\Core\Field\FieldStorageDefinitionInterface $field_definition
+   *   [Explicite description].
+   *
+   * @return array
+   *   The schema.
    */
   public static function schema(FieldStorageDefinitionInterface $field_definition): array {
     $columns = [
@@ -78,7 +93,12 @@ class RgbColorPickerItem extends FieldItemBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Method setValue.
+   *
+   * @param array|null $values
+   *   [Explicite description].
+   * @param bool $notify
+   *   [Explicite description].
    */
   public function setValue($values, $notify = TRUE) {
     if (isset($values['hex']) && preg_match('/^#?[0-9A-Fa-f]{6}$/', $values['hex'])) {
