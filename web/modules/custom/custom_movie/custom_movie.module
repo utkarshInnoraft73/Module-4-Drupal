@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Implement the needed hooks.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function custom_movie_preprocess_node(array &$variables) {
+  $node = $variables['node'];
+
+  // Check if the node is of type 'movie'.
+  if ($node instanceof NodeInterface && $node->getType() === 'movie') {
+    $config = \Drupal::config('custom_movie.settings');
+    $budget_amount = $config->get('price');
+    $movie_price = $node->get('field_movie_price')->value;
+
+    if ($budget_amount > $movie_price) {
+      $variables['movie_budget_status'] = t('The movie is under budget');
+    }
+    elseif ($budget_amount < $movie_price) {
+      $variables['movie_budget_status']=t('The movie is over budget');
+    }
+    else {
+      $variables['movie_budget_status']=t('The movie is within budget');
+    }
+  }
+}
