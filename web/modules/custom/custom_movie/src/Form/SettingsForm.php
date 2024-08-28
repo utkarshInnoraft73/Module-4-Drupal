@@ -8,26 +8,40 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configure Custom movie settings for this site.
+ * Configure the movie budget friendly price.
  */
 final class SettingsForm extends ConfigFormBase {
 
   /**
-   * {@inheritdoc}
+   * Method getFormId to get the form ID.
+   *
+   * @return string
+   *   Form id.
    */
   public function getFormId(): string {
     return 'custom_movie_settings';
   }
 
   /**
-   * {@inheritdoc}
+   * Method getEditableConfigNames.
+   *
+   * @return array
+   *   Editable config form name.
    */
   protected function getEditableConfigNames(): array {
     return ['custom_movie.settings'];
   }
 
   /**
-   * {@inheritdoc}
+   * Method buildForm to buid the form.
+   *
+   * @param array $form
+   *   Form.
+   * @param Drupal\Core\Form\FormStateInterface $form_state
+   *   Form state.
+   *
+   * @return array
+   *   Form elemnets.
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['price'] = [
@@ -39,24 +53,12 @@ final class SettingsForm extends ConfigFormBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state): void {
-    // @todo Validate the form here.
-    // Example:
-    // @code
-    //   if ($form_state->getValue('example') === 'wrong') {
-    //     $form_state->setErrorByName(
-    //       'message',
-    //       $this->t('The value is not correct.'),
-    //     );
-    //   }
-    // @endcode
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
+   * Method submitForm to submit the form.
+   *
+   * @param array $form
+   *   Form.
+   * @param Drupal\Core\Form\FormStateInterface $form_state
+   *   Form State.
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $this->config('custom_movie.settings')

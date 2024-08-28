@@ -5,28 +5,42 @@
  * Implement the needed hooks.
  */
 
-use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Implements hook_preprocess_node().
+ * Method custom_movie_entity_view to view the message.
+ *
+ * @param array $build
+ *   [Explicite description].
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   [Explicite description].
  */
-function custom_movie_preprocess_node(array &$variables) {
-  $node = $variables['node'];
+function custom_movie_entity_view(array &$build, EntityInterface $entity) {
 
-  // Check if the node is of type 'movie'.
-  if ($node instanceof NodeInterface && $node->getType() === 'movie') {
+  if ($entity->getEntityTypeId() == 'node' && $entity->bundle() == 'movie') {
+
+    // Getting the budget from confg form.
     $config = \Drupal::config('custom_movie.settings');
-    $budget_amount = $config->get('price');
-    $movie_price = $node->get('field_movie_price')->value;
+    $budget = $config->get('price');
 
-    if ($budget_amount > $movie_price) {
-      $variables['movie_budget_status'] = t('The movie is under budget');
+    // Getting the movie price from node.
+    $movie_price = $entity->get('field_movie_price')->value;
+
+    if ($budget > $movie_price) {
+      $message = 'The movie is under budget';
     }
-    elseif ($budget_amount < $movie_price) {
-      $variables['movie_budget_status']=t('The movie is over budget');
+    elseif ($budget < $movie_price) {
+      $message = 'The movie is over budget';
     }
     else {
-      $variables['movie_budget_status']=t('The movie is within budget');
+      $message = 'The movie is within budget';
     }
+
+    $build['status'] = [
+      '#markup' => $message,
+      '#cache' => [
+        'tags' => ['BUDGET_UPDATE'],
+      ],
+    ];
   }
 }
