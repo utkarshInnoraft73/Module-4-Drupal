@@ -1,0 +1,6 @@
+services:
+  movie_price_comparision_event:
+    class: '\Drupal\custom_movie\EventSubscriber\MovieComparison'
+    # arguments: ['@messenger', '@config.factory']
+    tags:
+      - {name: 'event_susbcriber'}

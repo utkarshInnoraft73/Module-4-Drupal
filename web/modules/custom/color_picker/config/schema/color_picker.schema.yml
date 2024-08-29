@@ -3,11 +3,11 @@ field.value.color_picker_rgb_color_picker:
   label: Default value
   mapping:
     r:
-      type: label
+      type: string
       label: Red
     g:
-      type: label
+      type: string
       label: Green
     b:
-      type: label
+      type: string
       label: Blue

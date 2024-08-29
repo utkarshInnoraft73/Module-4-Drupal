@@ -12,7 +12,7 @@ use Drupal\Core\TypedData\DataDefinition;
  * @FieldType(
  *   id = "color_picker_rgb_color_picker",
  *   label = @Translation("RGB color picker"),
- *   description = @Translation("Some description."),
+ *   description = @Translation("Field to take color code."),
  *   default_widget = "color_picker_rgb_color_picker_widget",
  *   default_formatter = "color_picker_rgb_color_picker_formatter",
  * )
@@ -45,17 +45,14 @@ class RgbColorPickerItem extends FieldItemBase {
     $properties['hex'] = DataDefinition::create('string')
       ->setLabel(t('Hex Code'));
 
-    $properties['r'] = DataDefinition::create('integer')
-      ->setLabel(t('Red'))
-      ->setRequired(TRUE);
+    $properties['r'] = DataDefinition::create('string')
+      ->setLabel(t('Red'));
 
-    $properties['g'] = DataDefinition::create('integer')
-      ->setLabel(t('Green'))
-      ->setRequired(TRUE);
+    $properties['g'] = DataDefinition::create('string')
+      ->setLabel(t('Green'));
 
-    $properties['b'] = DataDefinition::create('integer')
-      ->setLabel(t('Blue'))
-      ->setRequired(TRUE);
+    $properties['b'] = DataDefinition::create('string')
+      ->setLabel(t('Blue'));
 
     return $properties;
   }
@@ -72,17 +69,17 @@ class RgbColorPickerItem extends FieldItemBase {
   public static function schema(FieldStorageDefinitionInterface $field_definition): array {
     $columns = [
       'r' => [
-        'type' => 'int',
+        'type' => 'text',
         'not null' => FALSE,
         'description' => 'Color code of red.',
       ],
       'g' => [
-        'type' => 'int',
+        'type' => 'text',
         'not null' => FALSE,
         'description' => 'Color code of green.',
       ],
       'b' => [
-        'type' => 'int',
+        'type' => 'text',
         'not null' => FALSE,
         'description' => 'Color code of blue.',
       ],
