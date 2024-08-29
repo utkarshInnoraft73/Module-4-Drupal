@@ -25,14 +25,14 @@ class ColorBackgroundFormatterFormatter extends FormatterBase {
 
     foreach ($items as $delta => $item) {
       $rgb = [
-        'r' => $item->r,
-        'g' => $item->g,
-        'b' => $item->b,
+        'r' => $item->r ?? 0,
+        'g' => $item->g ?? 0,
+        'b' => $item->b ?? 0,
       ];
 
       $hex_color = Color::rgbToHex($rgb);
-      if (empty($hex_color)) {
-        $hex_color = '';
+      if (empty($hex_color) || $hex_color === '#00000') {
+        $hex_color = '#000000';
       }
       $elements[$delta] = [
         '#type' => 'html_tag',

@@ -22,32 +22,18 @@ class HexColorCodeWidgetWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state): array {
-    // Extract RGB values.
-    $r = $items[$delta]->r;
-    $g = $items[$delta]->g;
-    $b = $items[$delta]->b;
-
-    // Determine the default hex value.
-    if (!empty($items[$delta]->hex)) {
-      $default_hex = $items[$delta]->hex;
-    }
-    elseif (!empty($r) && !empty($g) && !empty($b)) {
-      // If hex is not set, convert RGB to hex if RGB values are available.
-      $default_hex = Color::rgbToHex("$r, $g, $b");
-    }
-    else {
-      // If no values are set, use an empty string.
-      $default_hex = '';
-    }
-
+    $rgb = [
+      'r' => $items[$delta]->r ?? 0,
+      'g' => $items[$delta]->g ?? 0,
+      'b' => $items[$delta]->b ?? 0,
+    ];
     $element['hex'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Hex Color'),
-      '#default_value' => $default_hex,
+      '#default_value' => Color::rgbToHex($rgb),
       '#description' => $this->t('Enter a 6-digit hex code, e.g., #FF5733.'),
       '#attributes' => ['maxlength' => 7],
     ];
-
     return $element;
   }
 
