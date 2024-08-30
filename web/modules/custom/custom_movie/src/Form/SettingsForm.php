@@ -45,6 +45,8 @@ class SettingsForm extends ConfigFormBase {
     $form['price'] = [
       '#type' => 'number',
       '#title' => $this->t('Budget friendly amount'),
+      '#min' => 0,
+      '#max' => 500,
       '#default_value' => $this->config('custom_movie.settings')->get('price'),
     ];
     return parent::buildForm($form, $form_state);

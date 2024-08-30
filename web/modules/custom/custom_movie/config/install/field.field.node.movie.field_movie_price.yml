@@ -16,10 +16,14 @@ entity_type: node
 bundle: movie
 label: 'Movie Price'
 description: 'Movie ticket price.'
+min: 0
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
+  min: 0
+  max: 500
+  prefix: 'Rs '
   display_summary: false
 field_type: decimal
