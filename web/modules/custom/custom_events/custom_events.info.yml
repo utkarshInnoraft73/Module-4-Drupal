@@ -1,5 +1,0 @@
-name: Custom events
-type: module
-description: This module is for custom event subscriber practice.
-core_version_requirement: ^10 || ^11
-package: custom
