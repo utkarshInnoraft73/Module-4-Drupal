@@ -24,19 +24,19 @@ class RgbColorPickerWidgetWidget extends WidgetBase {
     $element['r'] = [
       '#type' => 'number',
       '#title' => $this->t('Red'),
-      '#default_value' => $items[$delta]->r ?? '',
+      '#default_value' => (string) ($items[$delta]->r) ?? '',
     ];
 
     $element['g'] = [
       '#type' => 'number',
       '#title' => $this->t('Green'),
-      '#default_value' => $items[$delta]->g ?? '',
+      '#default_value' => (string) ($items[$delta]->g) ?? '',
     ];
 
     $element['b'] = [
       '#type' => 'number',
       '#title' => $this->t('Blue'),
-      '#default_value' => $items[$delta]->b ?? '',
+      '#default_value' => (string) ($items[$delta]->b) ?? '',
     ];
 
     return $element;
