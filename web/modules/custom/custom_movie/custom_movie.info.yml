@@ -1,0 +1,7 @@
+name: 'Custom movie'
+type: module
+description: 'This module has the content entity/config entity for the movie details.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:node

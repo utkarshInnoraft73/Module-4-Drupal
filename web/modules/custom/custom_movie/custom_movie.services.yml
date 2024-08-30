@@ -1,0 +1,6 @@
+services:
+  custom_movie.movie_node_view_subscriber:
+    class: Drupal\custom_movie\EventSubscriber\MovieNodeViewSubscriber
+    arguments: ['@messenger', '@config.factory']
+    tags:
+      - { name: 'event_subscriber' }
