@@ -65,17 +65,17 @@ class AwardWinningMovie extends ConfigEntityBase implements AwardWinningMovieInt
   protected int $year;
 
   /**
-   * Method setYear.
+   * Method setYear to set the award winning year of the movie.
    *
    * @param int $year
-   *   [Explicite description].
+   *   The year of the award winning.
    */
   public function setYear(int $year) {
     $this->year = $year;
   }
 
   /**
-   * Method getYear.
+   * Method getYear to get the award winning year of the movie.
    *
    * @return int
    *   Return the year of award winning.

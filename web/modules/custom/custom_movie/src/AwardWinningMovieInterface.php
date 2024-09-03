@@ -10,15 +10,18 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 interface AwardWinningMovieInterface extends ConfigEntityInterface {
 
   /**
-   * Method getYear.
+   * Method getYear to get the award winning year of the movie.
+   *
+   * @return int
+   *   Return the year of award winning.
    */
   public function getYear();
 
   /**
-   * Method setYear.
+   * Method setYear to set the award winning year of the movie.
    *
    * @param int $year
-   *   The winning year.
+   *   The year of the award winning.
    */
   public function setYear(int $year);
 
