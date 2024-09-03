@@ -18,7 +18,15 @@ use Drupal\Core\Field\FormatterBase;
 class ColorBackgroundFormatterFormatter extends FormatterBase {
 
   /**
-   * {@inheritdoc}
+   * Display the static text with background of color code that is user submit.
+   *
+   * @param Drupal\Core\Field\FieldItemListInterface $items
+   *   [Explicite description].
+   * @param mixed $langcode
+   *   [Explicite description].
+   *
+   * @return array
+   *   Return the markup array.
    */
   public function viewElements(FieldItemListInterface $items, $langcode): array {
     $elements = [];
