@@ -1,0 +1,13 @@
+field.value.color_picker_rgb_color_picker:
+  type: mapping
+  label: Default value
+  mapping:
+    r:
+      type: text
+      label: Red
+    g:
+      type: text
+      label: Green
+    b:
+      type: text
+      label: Blue
