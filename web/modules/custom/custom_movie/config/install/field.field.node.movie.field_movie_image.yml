@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - custom_movie
+  config:
+    - field.storage.node.field_movie_image
+    - node.type.movie
+  module:
+    - text
+    - file
+id: node.movie.field_movie_image
+field_name: field_movie_image
+entity_type: node
+bundle: movie
+label: 'Movie image'
+description: 'Movie thumbnail image.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: image
