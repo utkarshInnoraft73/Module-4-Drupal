@@ -36,12 +36,14 @@ final class SettingsForm extends ConfigFormBase {
    * Method buildForm to buid the form.
    *
    * @param array $form
-   *   Form.
+   *   The primary structure that represents the form's components and
+   *   configuration.
    * @param Drupal\Core\Form\FormStateInterface $form_state
-   *   Form state.
+   *   This object provides methods to get, set, and manage form values and
+   *   other related states.
    *
    * @return array
-   *   Form elemnets.
+   *   Return the form elements in the form of array.
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form['price'] = [
