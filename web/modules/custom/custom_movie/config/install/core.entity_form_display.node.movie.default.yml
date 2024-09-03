@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - custom_movie
+  config:
+    - field.field.node.movie.body
+    - field.field.node.movie.field_movie_price
+    - field.field.node.movie.field_movie_image
+    - node.type.movie
+  module:
+    - text
+    - user
+    - file
+id: node.movie.default
+targetEntityType: node
+bundle: movie
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_textarea_with_summary
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+  field_movie_price:
+    label: above
+    type: number
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_movie_image:
+    label: above
+    type: image_image
+    weight: 103
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 102
+hidden: {  }
