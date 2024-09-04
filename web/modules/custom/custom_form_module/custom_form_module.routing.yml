@@ -12,7 +12,7 @@ custom_form_module.ajax_setting:
     _title: 'Ajax config form'
     _form: 'Drupal\custom_form_module\Form\AjaxFormSetting'
   requirements:
-    _permission: 'Form with AJAX feature'
+    _permission: 'administer site configuration'
 
 custom_form_module.reset_password:
   path: '/admin/config/system/reset-password'

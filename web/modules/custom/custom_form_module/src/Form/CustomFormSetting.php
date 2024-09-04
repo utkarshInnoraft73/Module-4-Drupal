@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\custom_form_module\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -10,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure Custom Form module settings for this site.
  */
-final class CustomFormSetting extends ConfigFormBase {
+class CustomFormSetting extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
@@ -95,12 +93,6 @@ final class CustomFormSetting extends ConfigFormBase {
     if (!in_array($email_domain, $public_domains)) {
       $form_state->setErrorByName('email',
       $this->t('The email domain must be one of the following: gmail.com, yahoo.com, outlook.com, hotmail.com.')
-      );
-    }
-
-    if (substr($email, -4) !== '.com') {
-      $form_state->setErrorByName('email',
-      $this->t('Only .com email addresses are allowed.')
       );
     }
 
