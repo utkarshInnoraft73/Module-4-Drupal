@@ -1,8 +1,3 @@
-custom_permission:
-  title: 'custom permission'
+hello_world.custom_permission:
+  title: 'Custom permission'
   description: 'Custom permission for hello world module.'
-  restrict access: true
-
-add text:
-  title: 'Add text'
-  description: 'Add some random text for check.'

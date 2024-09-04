@@ -3,7 +3,7 @@
 namespace Drupal\hello_world\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -14,17 +14,17 @@ class ShowTextController extends ControllerBase {
   /**
    * Protect currentUser.
    *
-   * @var \Drupal\Core\Session\AccountProxyInterface
+   * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
 
   /**
    * Method __construct.
    *
-   * @param Drupal\Core\Session\AccountProxyInterface $current_user
+   * @param Drupal\Core\Session\AccountInterface $current_user
    *   The current logged in user.
    */
-  public function __construct(AccountProxyInterface $current_user) {
+  public function __construct(AccountInterface $current_user) {
     $this->currentUser = $current_user;
   }
 
@@ -48,21 +48,11 @@ class ShowTextController extends ControllerBase {
    */
   public function showText() : array {
     $user = $this->currentUser();
-    if ($this->currentUser->hasPermission('custom_permission')) {
-
-      return [
-        '#type' => 'markup',
-        '#markup' => $this->t("Hello") . " " . $user->getDisplayName(),
-        '#cache' => [
-          'tags' => ['user:' . $this->currentUser()->id()],
-        ],
-      ];
-    }
     return [
       '#type' => 'markup',
-      '#markup' => 'No Permission',
+      '#markup' => $this->t("Hello") . " " . $user->getDisplayName(),
       '#cache' => [
-        'tags' => ['user:' . $this->currentUser->id()],
+        'tags' => ['user:' . $this->currentUser()->id()],
       ],
     ];
   }
