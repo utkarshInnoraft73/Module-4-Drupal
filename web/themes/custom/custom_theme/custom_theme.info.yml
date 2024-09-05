@@ -1,0 +1,8 @@
+name: Custom theme
+type: theme
+base theme: olivero
+description: Suggesting cutom theme for practice the Drupal theming
+package: Custom
+core_version_requirement: ^10
+libraries:
+  - custom_theme/global
