@@ -13,11 +13,3 @@ custom_event_dashboard.taxonomy_refered:
     _form: 'Drupal\custom_event_dashboard\Form\TaxonomyReferedForm'
   requirements:
     _permission: 'access content'
-
-# custom_event_dashboard.taxonomy_display:
-#   path: '/term-display'
-#   defaults:
-#     _title: 'Term data display'
-#     _controller: '\Drupal\custom_event_dashboard\Controller\TaxonomyTermDisplay::content'
-#   requirements:
-#     _permission: 'access content'
