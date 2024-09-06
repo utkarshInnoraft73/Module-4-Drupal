@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * This file is for hooks implementation.
+ */
+
+/**
+ * Method check_phone_page_attachments.
+ *
+ * @param array $page
+ *   [Explicite description].
+ */
+function check_phone_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'check_phone/check_phone.global_library';
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function check_phone_node_view(array &$build, \Drupal\node\NodeInterface $node, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if ($node->bundle() == 'page') {
+    $build['#attached']['library'][] = 'check_phone/check_phone.node_custom_library';
+  }
+}

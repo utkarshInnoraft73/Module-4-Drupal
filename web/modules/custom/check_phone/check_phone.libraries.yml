@@ -1,0 +1,19 @@
+check_phone.global_library:
+  js:
+    js/global.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+check_phone.node_custom_library:
+  js:
+    js/node-custom.js: {}
+  dependencies:
+    - core/jquery
+
+check_phone.phone_format_library:
+  js:
+    js/check-phone.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

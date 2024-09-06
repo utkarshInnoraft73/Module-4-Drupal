@@ -1,0 +1,7 @@
+check_phone.phone:
+  path: '/phone'
+  defaults:
+    _title: 'Phone'
+    _form: 'Drupal\check_phone\Form\PhoneForm'
+  requirements:
+    _permission: 'access content'

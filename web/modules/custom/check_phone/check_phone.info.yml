@@ -1,0 +1,5 @@
+name: 'Check Phone'
+type: module
+description: 'This module will check the phone number format.'
+package: Custom
+core_version_requirement: ^10 || ^11
