@@ -4,7 +4,7 @@ custom_event_dashboard.dashboard:
     _controller: '\Drupal\custom_event_dashboard\Controller\CustomEventDashboardController::build'
     _title: 'Custom event dashboard'
   requirements:
-    _permission: 'Access content'
+    _permission: 'access content'
 
 custom_event_dashboard.taxonomy_refered:
   path: '/custom-term-refered'

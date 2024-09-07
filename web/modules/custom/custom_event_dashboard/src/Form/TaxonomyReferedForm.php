@@ -76,7 +76,6 @@ class TaxonomyReferedForm extends FormBase {
       ],
     ];
 
-    // Check if there are results stored in the form state.
     if ($form_state->get('results')) {
       $results = $form_state->get('results');
 
@@ -86,30 +85,50 @@ class TaxonomyReferedForm extends FormBase {
         '#open' => TRUE,
         '#weight' => '1',
       ];
-      // Loop through each result and display it.
-      foreach ($results as $index => $result) {
-        $form['results']["result_$index"] = [
+
+      // Group results by term to display tid and uuid once.
+      $terms = [];
+
+      foreach ($results as $result) {
+        $terms[$result->tid]['uuid'] = $result->uuid;
+        $terms[$result->tid]['nodes'][] = [
+          'title' => !empty($result->title) ? $result->title : '',
+          'url' => !empty($result->nid) ? $this->buildNodeUrl($result->nid) : '#',
+          'url_text' => !empty($result->nid) ? $this->t('View Node') : $this->t('No URL available'),
+        ];
+      }
+
+      // Loop through each term and display its details.
+      foreach ($terms as $tid => $term_data) {
+        $form['results']["term_$tid"] = [
           '#type' => 'item',
           '#markup' => $this->t(
             '<strong>Term ID:</strong> @tid<br>
-             <strong>UUID:</strong> @uuid<br>
-             <strong>Node Title:</strong> @title<br>
-             <strong>Node URL:</strong><a href = @url> @title</a>',
-          [
-            '@tid' => $result->tid,
-            '@uuid' => $result->uuid,
-            '@title' => $result->title,
-            '@url' => $this->buildNodeUrl($result->nid),
-          ]),
+             <strong>UUID:</strong> @uuid<br>',
+            [
+              '@tid' => $tid,
+              '@uuid' => $term_data['uuid'],
+            ]
+          ),
         ];
+        // Now display the nodes related to the term.
+        foreach ($term_data['nodes'] as $index => $node) {
+          $form['results']["term_{$tid}_node_$index"] = [
+            '#type' => 'item',
+            '#markup' => $this->t(
+              '<strong>Node Title:</strong> @title<br>
+               <strong>Node URL:</strong> <a href="@url">@url_text</a>',
+              [
+                '@title' => $node['title'],
+                '@url' => $node['url'],
+                '@url_text' => $node['url_text'],
+              ]
+            ),
+          ];
+        }
       }
     }
-    else {
-      $form['results']['error'] = [
-        '#type' => 'markup',
-        '#markup' => $this->t('No taxonomy term is found.'),
-      ];
-    }
+
     return $form;
   }
 
@@ -145,11 +164,19 @@ class TaxonomyReferedForm extends FormBase {
     // Database queries to select and display the taxonomy term related data.
     $query = $this->database->select('taxonomy_term_field_data', 'ttfd');
     $query->join('taxonomy_term_data', 'ttd', 'ttd.tid = ttfd.tid');
-    $query->join('taxonomy_index', 'ti', 'ti.tid = ttfd.tid');
-    $query->join('node_field_data', 'nfd', 'nfd.nid = ti.nid');
-    $query->fields('ttd', ['tid', 'uuid'])
-      ->fields('nfd', ['title', 'nid'])
-      ->condition('ttfd.tid', $term_name[0]['target_id']);
+    $query->fields('ttd', ['tid', 'uuid']);
+
+    // Adding a left join with taxonomy_index to get node references, if they exist.
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.tid = ttd.tid');
+
+    // Adding a left join with node_field_data to get node title and nid, if nodes are referencing the term.
+    $query->leftJoin('node_field_data', 'nfd', 'nfd.nid = ti.nid');
+    $query->fields('nfd', ['title', 'nid']);
+
+    // Filtering by the term ID.
+    $query->condition('ttfd.tid', $term_name[0]['target_id']);
+
+    // Execute the query and fetch all results.
     $results = $query->execute()->fetchAll();
 
     // Setting the data.
