@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * @file
  * Functions to support theming in the sub-bootstrap theme.
@@ -17,18 +15,4 @@ function sub_bootstrap_preprocess_html(array &$variables): void {
       $variables['attributes']['class'][] = 'movie-node';
     }
   }
-}
-
-/**
- * Implements hook_preprocess_HOOK() for page.html.twig.
- */
-function sub_bootstrap_preprocess_page(array &$variables): void {
-
-}
-
-/**
- * Implements hook_preprocess_HOOK() for node.html.twig.
- */
-function sub_bootstrap_preprocess_node(array &$variables): void {
-
 }
