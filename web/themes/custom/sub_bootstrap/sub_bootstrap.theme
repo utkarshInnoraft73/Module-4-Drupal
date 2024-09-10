@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the sub-bootstrap theme.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function sub_bootstrap_preprocess_html(array &$variables): void {
+  if (\Drupal::routeMatch()->getRouteName() == 'entity.node.canonical') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface && $node->bundle() == 'movie') {
+      $variables['attributes']['class'][] = 'movie-node';
+    }
+  }
+}

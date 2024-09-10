@@ -1,0 +1,6 @@
+global:
+  js:
+    js/sub-bootstrap.js: {}
+  css:
+    component:
+      css/component/node.css: {}
