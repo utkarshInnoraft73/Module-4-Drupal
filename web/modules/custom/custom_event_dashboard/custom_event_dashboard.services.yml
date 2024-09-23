@@ -1,0 +1,4 @@
+services:
+  custom_event_dashboard.dashboard:
+    class: \Drupal\custom_event_dashboard\Controller\CustomEventDashboardController
+    arguments: ['@database']

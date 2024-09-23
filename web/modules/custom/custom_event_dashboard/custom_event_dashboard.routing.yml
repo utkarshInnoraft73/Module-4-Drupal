@@ -1,0 +1,15 @@
+custom_event_dashboard.dashboard:
+  path: '/event/dashboard'
+  defaults:
+    _controller: '\Drupal\custom_event_dashboard\Controller\CustomEventDashboardController::build'
+    _title: 'Custom event dashboard'
+  requirements:
+    _permission: 'access content'
+
+custom_event_dashboard.taxonomy_refered:
+  path: '/custom-term-refered'
+  defaults:
+    _title: 'Taxonomy Refered'
+    _form: 'Drupal\custom_event_dashboard\Form\TaxonomyReferedForm'
+  requirements:
+    _permission: 'access content'

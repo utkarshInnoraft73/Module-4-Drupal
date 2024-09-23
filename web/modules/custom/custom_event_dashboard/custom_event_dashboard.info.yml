@@ -1,0 +1,7 @@
+name: 'Custom event dashboard'
+type: module
+description: 'This module make a dashboard of the &#039;Event&#039; content type.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:node
