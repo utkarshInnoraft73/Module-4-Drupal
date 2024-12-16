@@ -1,0 +1,3 @@
+hello_world.custom_permission:
+  title: 'Custom permission'
+  description: 'Custom permission for hello world module.'

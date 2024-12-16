@@ -1,0 +1,8 @@
+hello_world_route:
+  path: '/hello_world_show'
+  defaults:
+    _controller: '\Drupal\hello_world\Controller\ShowTextController::showText'
+    _title: 'Show hello world'
+  requirements:
+    _permission: hello_world.custom_permission
+
